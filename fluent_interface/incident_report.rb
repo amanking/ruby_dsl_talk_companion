@@ -1,4 +1,6 @@
-Incident = Struct.new(:id, :system, :type, :severity, :priority, :date)
+Incident = Struct.new(:id, :system, :type, :severity, :priority, :date) do
+  def self.all; []; end # fake implementation for documentation; spec just stubs it
+end
 
 class IncidentReport
   def self.for(*systems)

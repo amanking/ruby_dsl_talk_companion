@@ -2,25 +2,30 @@ require 'spec_helper'
 
 describe SocialGraph do
   before :each do
-    @fan_klass = Struct.new(:name) do
+    [:Fan, :Celebrity].each do |temp_klass|
+      Object.instance_eval { remove_const(temp_klass) if const_defined?(temp_klass) }
+    end
+
+    Fan = Struct.new(:name) do
       include SocialGraph
       social_graph do
         relationship :fan_followings, as: :fan, to: :celebrity, is: :outgoing
       end
     end
 
-    @celebrity_klass = Struct.new(:name) do
+    Celebrity = Struct.new(:name) do
       include SocialGraph
       social_graph do
         relationship :fan_followings, as: :celebrity, to: :fan, is: :incoming
       end
     end
+
   end
 
   describe "fan followings" do
     it "should relate fans and celebrities from fan end" do
-      husain = @fan_klass.new("M.F. Husain")
-      madhuri = @celebrity_klass.new("Madhuri Dixit")
+      husain = Fan.new("M.F. Husain")
+      madhuri = Celebrity.new("Madhuri Dixit")
 
       husain.add_celebrity(madhuri)
 
@@ -36,8 +41,8 @@ describe SocialGraph do
     end
 
     it "should relate fans and celebrities from celebrity end" do
-      husain = @fan_klass.new("M.F. Husain")
-      madhuri = @celebrity_klass.new("Madhuri Dixit")
+      husain = Fan.new("M.F. Husain")
+      madhuri = Celebrity.new("Madhuri Dixit")
 
       madhuri.add_fan(husain)
 
