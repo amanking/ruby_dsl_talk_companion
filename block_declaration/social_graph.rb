@@ -7,13 +7,13 @@ module SocialGraph
 
   module ClassMethods
     def social_graph(&block)
-      social_graph_spec = SocialGraph::Spec.new
+      social_graph_spec = Specification.new
       social_graph_spec.instance_eval(&block)
       social_graph_spec.apply_on(self)
     end
   end
 
-  class Spec
+  class Specification
     def initialize
       @relationships = []
     end
