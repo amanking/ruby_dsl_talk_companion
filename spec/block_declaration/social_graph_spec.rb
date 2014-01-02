@@ -33,10 +33,10 @@ describe SocialGraph do
       madhuri.fan_list.should == [ husain ]
 
       husain.fan_followings.should == [
-        { relationship: :fan_followings, from_fan: husain, to_celebrity: madhuri }
+        { relationship: :fan_followings, source: husain, target: madhuri }
       ]
       madhuri.fan_followings.should == [
-        { relationship: :fan_followings, from_fan: husain, to_celebrity: madhuri }
+        { relationship: :fan_followings, source: husain, target: madhuri }
       ]
     end
 
@@ -50,10 +50,10 @@ describe SocialGraph do
       madhuri.fan_list.should == [ husain ]
 
       husain.fan_followings.should == [
-        { relationship: :fan_followings, from_fan: husain, to_celebrity: madhuri }
+        { relationship: :fan_followings, source: husain, target: madhuri }
       ]
       madhuri.fan_followings.should == [
-        { relationship: :fan_followings, from_fan: husain, to_celebrity: madhuri }
+        { relationship: :fan_followings, source: husain, target: madhuri }
       ]
     end
   end

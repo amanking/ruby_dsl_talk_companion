@@ -33,8 +33,8 @@ module SocialGraph
     def apply_on(base)
       self_side, other_side =
           (options[:is] == :outgoing) ?
-              [ "from_#{options[:as]}", "to_#{options[:to]}" ] :
-                  [ "to_#{options[:as]}", "from_#{options[:to]}" ]
+              [ "source", "target" ] :
+                  [ "target", "source" ]
 
       base.class_eval(<<-EOS, __FILE__, __LINE__)
         def add_#{options[:to]}(other)
